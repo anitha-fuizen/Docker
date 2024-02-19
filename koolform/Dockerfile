@@ -2,14 +2,14 @@
 FROM centos:7
 
 # Set metadata labels
-LABEL "Author"="saiteja Irrinki"
+LABEL "Author"="anitha yeruva"
 LABEL "Project"="koolform"
 
 # Install necessary packages - Apache, wget, and unzip
 RUN yum install httpd wget unzip -y
 
 # Download the website template
-RUN https://www.tooplate.com/zip-templates/2136_kool_form_pack.zip
+RUN https://www.tooplate.com/zip-templates/2136_kool_form_pack.zip --no-check-certificate
 
 # Unzip the downloaded template
 RUN unzip 2136_kool_form_pack.zip
