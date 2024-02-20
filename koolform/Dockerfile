@@ -8,7 +8,7 @@ LABEL "Project"="$PROJECT"
 RUN yum install httpd wget unzip -y
 
 # Use --no-check-certificate flag to bypass SSL certificate checks
-ARG DOWNLOAD_URL="https://templatemo.com/tm-zip-files-2020/templatemo_520_highway.zip"
+ARG DOWNLOAD_URL="https://templatemo.com/tm-zip-files-2020/templatemo_520_highway.zip" --no-check-certificate
 RUN wget "$DOWNLOAD_URL" --no-check-certificate
 ARG FILE="templatemo_520_highway"
 RUN unzip "$FILE".zip
