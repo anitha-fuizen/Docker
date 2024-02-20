@@ -1,22 +1,30 @@
-# Define variables
-ARG AUTHOR="anitha yeruva"
-ARG PROJECT="Highway"
-# Use the variables
+# Use the CentOS 7 base image
 FROM centos:7
-LABEL "Author"="$AUTHOR"
-LABEL "Project"="$PROJECT"
+
+# Set metadata labels
+LABEL "Author"="saiteja Irrinki"
+LABEL "Project"="Wave"
+
+# Install necessary packages - Apache, wget, and unzip
 RUN yum install httpd wget unzip -y
 
-# Use --no-check-certificate flag to bypass SSL certificate checks
-ARG DOWNLOAD_URL="https://templatemo.com/tm-zip-files-2020/templatemo_520_highway.zip" --no-check-certificate
-RUN wget "$DOWNLOAD_URL" --no-check-certificate
-ARG FILE="templatemo_520_highway"
-RUN unzip "$FILE".zip
-RUN cp -r "$FILE"/* /var/www/html/
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
-EXPOSE 80
-WORKDIR /var/www/html
-VOLUME /var/log/httpd
+# Download the website template
+RUN wget https://www.tooplate.com/zip-templates/2121_wave_cafe.zip --no-check-certificate
 
-# Set the image name and optionally a tag
-LABEL "name"="$PROJECT"
+# Unzip the downloaded template
+RUN unzip 2121_wave_cafe.zip
+
+# Copy the contents of the unzipped template to the web server directory
+RUN cp -r 2121_wave_cafe/* /var/www/html/
+
+# Start the Apache web server in the foreground
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
+# Expose port 80 for web traffic
+EXPOSE 80
+
+# Set the working directory to the web server directory
+WORKDIR /var/www/html
+
+# Create a volume for Apache's log files
+VOLUME /var/log/httpd
