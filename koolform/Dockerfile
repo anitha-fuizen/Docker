@@ -9,7 +9,7 @@ LABEL "Project"="koolform"
 RUN yum install httpd wget unzip -y
 
 # Download the website template
-RUN https://www.tooplate.com/zip-templates/2136_kool_form_pack.zip --no-check-certificate
+RUN wget https://www.tooplate.com/zip-templates/2136_kool_form_pack.zip --no-check-certificate
 
 # Unzip the downloaded template
 RUN unzip 2136_kool_form_pack.zip
